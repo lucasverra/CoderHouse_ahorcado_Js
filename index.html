@@ -1,23 +1,58 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<title>Javascript</title>
-	<script type="text/Javascript">
 
-		var mivariable= " Hola Mundo";
+  <meta charset="UTF-8">
 
-	</script>
+  <title>CodePen - tp7- ahoracado</title>
 
-	<link rel="stylesheet" href="styles/styles.css">
+  <link rel="stylesheet" href="css/normalize.css">
+
+    <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
+
 </head>
+
 <body>
-	<a href="javascript:alert('danger');" >Alert</a>
-	<a href="#" onfocus="" >Alert</a>
-	<script type="text/Javascript">
 
-		var otramivariable= "estoy en el body";
+  <section class="header">
+  <h1>
+    Este es un juego del ahorcado en JS
+  </h1>
+  <p> Por favor clikea en alguno de los 3 botones <br> para jugar con una palabra elegida al azar :) </p>
+      <div class="botonera">
+        <button id="b1">Palabra1</button>
+        <button id="b2">Palabra2</button>
+        <button id="b3">Palabra3</button>
+      </div>
+      <p id="asignavariable"></p>
 
-	</script>
-	<script type="text/Javascript "src="script.js"></script>
+      <div class="rayas">
+          <ul class="listadeletras">
+              <!--<li class="letra1">_</li>esto esta mal ya que es fijo (9) y deberia depender de la q de letras que tiene palabraparaadivinar
+               <li class="letra2">_</li>
+              <li class="letra3">_</li>
+              <li class="letra4">_</li>
+              <li class="letra5">_</li>
+              <li class="letra6">_</li>
+              <li class="letra7">_</li>
+              <li class="letra8">_</li>
+              <li class="letra9">_</li> -->
+          </ul>
+      </div>
+      <div class="btncomenzar">
+        <button id="btncomenzar">Comenzar a jugar!</button>
+      </div>
+      <div >
+        <input class="inputusuario" type="text" name="letrainputusuario" placeholder="escribi la letra acá">
+      </div>
+      <div class="btnverifica">
+        <button id="btnverifica">VERIFICAR!</button>
+      </div>
+</section>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <script src="js/index.js"></script>
+
 </body>
+
 </html>
