@@ -1,0 +1,163 @@
+var loquetipeaVARGLOB = "";
+var palabraparaadivinar = "todavia no está definida";
+var vecesqueusuariopifio = 0;
+var dondeocurreVARGLOB= 0;
+
+var listadepalabras = ["afiliadla","finalidad","afiliando","filandola","filandolo","finandola","finandolo","influidla","afiliadlo","fatalidad","futilidad","infinidad","infantado","infatuado","infundado","audiofono","infatuada","difundida","difundian","infundada","infundida","infundian","alfalfada","afollando","alfalfado","aflautado","aflautada","fallutada","afondando","anilladla","alindando","anillando","anilladlo","odiandola","odiandolo","daliniano","atildando","dilatando","latinando","talionada","talionado","titilando","tonadilla","tonalidad","alatinado","lantanido","indultado","titulando","inundadlo","latinidad","natalidad","atilintad","indultada","intitulad","anualidad","inundadla","ladillado","dilatadlo","totalidad","auditadlo","tituladlo","dilatadla","auditadla","tituladla","anidiando","indinando","andantino","tintinado","auditando","inundando","andantina","tintinada","allanadla","allanando","allanadlo","donandola","donandolo","atoandola","atoandolo","atolladan","atollando","atontadla","atontadlo","datandola","datandolo","dotandola","dotandolo","notandola","notandolo","talandola","talandolo","untandola","untandolo","aunandola","aunandolo","dudandola","dudandolo","onduladla","ondulando","onduladlo","undulando","atalantad","atolladad","atolladal","ataludado","ataludada","anonadada","anonadado","atondando","atontando","aduanando","tunantada","litofania","antifonal","naftalina","flautillo","infantino","fotiniano","infantina","antillano","alantoina","antillana","atilintan","intitulan","antoniano","antoniana","atalantan","indiofilo","fondillon","influidlo","fundillon","difundido","infundido","infinitud","fotodiodo","titulillo"];
+
+function shuffle(array) {
+  var currentIndex = array.length, temporaryValue, randomIndex ;
+
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
+
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
+
+  return array;
+}
+
+shuffle(listadepalabras);
+
+console.log(listadepalabras);
+
+palabra1= listadepalabras[56];
+palabra2= listadepalabras[78];
+palabra3= listadepalabras[25];
+
+
+document.getElementById("b1").onclick = function() {myFunction1()};
+
+function myFunction1() {
+    alert("Ok! Elegiste la opcion 1. Ahora a jugar!");
+    palabraparaadivinar = palabra1;
+    // document.getElementById("asignavariable").innerHTML = palabra1;
+    cantidaddeletras = palabraparaadivinar.length;
+}
+
+document.getElementById("b2").onclick = function() {myFunction2()};
+
+function myFunction2() {
+    alert("Ok! Elegiste la opcion 2. Ahora a jugar!");
+    palabraparaadivinar = palabra2;
+    // document.getElementById("asignavariable").innerHTML = palabra2;
+    cantidaddeletras = palabraparaadivinar.length;
+}
+
+document.getElementById("b3").onclick = function() {myFunction3()};
+
+function myFunction3() {
+    alert("Ok! Elegiste la opcion 3. Ahora a jugar!");
+    palabraparaadivinar = palabra3;
+    // document.getElementById("asignavariable").innerHTML = palabra3;
+    cantidaddeletras = palabraparaadivinar.length;
+}
+
+// $(document).ready(function() {
+//     $("div").click(function() {
+//         $(this).fadeOut("slow");
+//     });
+// });
+
+
+$(document).ready(function(){
+    $('#b1, #b2, #b3').click(function(){
+        for (var i = 0, len = palabraparaadivinar.length; i < len; i++) {$(".rayas ul").append('<li>_</li>')};
+        p = 0;
+        $(".rayas ul li").each( function() {$(this).attr("class", "letra"+p); p++});
+        $(".rayas").css("display", "block");
+        $(".btncomenzar").css("display", "block");
+
+    });
+});
+
+$(document).ready(function(){
+    $('#btncomenzar').click(function(){
+        alert("Ok! Juguemos. Tenes 5 posibilidades de error. A la quinta, GAME OVER. Tipea la letra que te parece puede pertenecer a la palabra escondida. Es el ahorcado man, ya sabes jugar!");
+        $(".inputusuario").css("display", "inline-block");
+        $(".btnverifica").css("display", "block");
+    });
+});
+
+
+$(document).ready(function(){
+    $(document).on ('keypress', function (e) {
+    loquetipeaVARGLOB = (String.fromCharCode(e.which));
+    console.log(loquetipeaVARGLOB);
+    
+    });
+});
+
+// INICIO : estas dos funciones las saque de stack para contar y saber donde suceden las posibles multiples repeticiones de una letra en una palabra
+
+function occurrences(string, substring) {
+
+  var n = 0;
+  var pos = 0;
+  var l=substring.length;
+
+  while (true) {
+    pos = string.indexOf(substring, pos);
+    if (pos > -1) {
+      n++;
+      pos += l;
+    } else {
+      break;
+    }
+  }
+  return (n);
+}
+
+function getMatchIndexes(str, toMatch) {
+    var toMatchLength = toMatch.length,
+        indexMatches = [], match,
+        i = 0;
+
+    while ((match = str.indexOf(toMatch, i)) > -1) {
+        indexMatches.push(match);
+        i = match + toMatchLength;
+    }
+
+    return indexMatches;
+}
+
+
+// FIN : estas dos funciones las saque de stack para contar y saber donde suceden las posibles multiples repeticiones de una letra en una palabra
+
+
+$(document).ready(function(){
+    $('#btnverifica').click(function(){
+        if (vecesqueusuariopifio === 5 ) { alert ("Y vos pensaste que te iba a dejar seguir jugando dps de los 5 errores? Ya esta macho, sos de madera. pegate una vuelta por la RAE y volve a ejecutar esta pagina");window.location = window.location;
+            var win = window.open('http://www.rae.es/', '_blank');
+            if(win){
+                //Browser has allowed it to be opened
+                win.focus();
+            }else{
+                //Broswer has blocked it
+                alert('Please allow popups for this site');
+            }
+        }
+        else {
+        $('.inputusuario').val("");
+        if ( palabraparaadivinar.indexOf(loquetipeaVARGLOB) > -1 ) {alert('Joya, le pagaste a la letra ' +loquetipeaVARGLOB);
+        var vecesqueocurre = occurrences(palabraparaadivinar, loquetipeaVARGLOB);
+        dondeocurreVARGLOB = getMatchIndexes(palabraparaadivinar, loquetipeaVARGLOB);
+        console.log(vecesqueocurre);
+        console.log(dondeocurreVARGLOB);
+        // $(dondeocurreVARGLOB).each(function(){$('.rayas ul li.letra' + )});
+        for (var x = 0, len = dondeocurreVARGLOB.length; x < len; x++) {$(".rayas ul .letra"+dondeocurreVARGLOB[x]).contents().replaceWith(loquetipeaVARGLOB)};
+        }
+        else {vecesqueusuariopifio++;
+        alert("sos un choto. Error numero "+vecesqueusuariopifio);
+        
+        }
+        }
+    });
+});
